@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brian Stegman · Desarrollador Full Stack</title>
+<meta name="description" content="Desarrollador Full Stack: Next.js, React, TypeScript, Node.js, PHP y .NET. Plataformas en producción con integraciones de WhatsApp, Instagram e inteligencia artificial.">
+<meta property="og:title" content="Brian Stegman · Desarrollador Full Stack">
+<meta property="og:description" content="Plataformas web en producción, integraciones con WhatsApp e IA. Mirá mis proyectos y descargá mi CV.">
+<meta property="og:image" content="https://maxistegman.com.ar/img/maxi.webp">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2310131a'/><text x='50%' y='56%' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='700' font-size='30' fill='%237c8cff'>BS</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0e13; --panel: #131720; --line: #232a38; --fg: #e9ecf2; --muted: #9aa3b5; --accent: #7c8cff; --accent-2: #45d4a6;
+    --sans: "Inter Tight", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding-inline: max(20px, env(safe-area-inset-left, 0px)); }
+  .mono { font-family: var(--mono); font-size: 13px; letter-spacing: .02em; }
+
+  header.top { position: sticky; top: 0; z-index: 10; background: rgba(12,14,19,.82); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+  .logo { font-weight: 700; text-decoration: none; letter-spacing: -.01em; }
+  .logo span { color: var(--accent); }
+  nav { display: flex; align-items: center; gap: 24px; }
+  nav a { text-decoration: none; color: var(--muted); font-size: 15px; }
+  nav a:hover { color: var(--fg); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--line); transition: transform .15s, border-color .15s, background .15s; }
+  .btn:hover { transform: translateY(-1px); border-color: #3a4459; }
+  .btn.primary { background: var(--accent); color: #0c0e13; border-color: var(--accent); }
+  .btn.primary:hover { background: #95a2ff; }
+  @media (max-width: 720px) { nav a:not(.btn) { display: none; } }
+
+  .hero { padding: 88px 0 72px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.25fr .75fr; gap: 56px; align-items: center; }
+  .eyebrow { color: var(--accent-2); }
+  h1 { font-size: clamp(40px, 6vw, 68px); line-height: 1.02; letter-spacing: -.035em; margin: 14px 0 20px; text-wrap: balance; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .lead { color: var(--muted); font-size: 19px; max-width: 34em; margin: 0 0 32px; }
+  .acciones { display: flex; flex-wrap: wrap; gap: 12px; }
+  .foto { position: relative; }
+  .foto img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 20px; border: 1px solid var(--line); }
+  .foto .chip { position: absolute; left: -18px; bottom: 28px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; box-shadow: 0 20px 40px -20px #000; }
+  .chip b { display: block; font-size: 15px; }
+  .chip .mono { color: var(--muted); }
+  .punto { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); margin-right: 6px; box-shadow: 0 0 0 4px rgba(69,212,166,.15); }
+  @media (max-width: 860px) { .hero { padding-top: 48px; } .hero .wrap { grid-template-columns: 1fr; gap: 40px; } .foto { max-width: 340px; } .foto .chip { left: 12px; } }
+
+  .datos { border-block: 1px solid var(--line); }
+  .datos .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .dato { padding: 28px 20px; border-left: 1px solid var(--line); }
+  .dato:first-child { border-left: 0; padding-left: 0; }
+  .dato b { display: block; font-size: 32px; letter-spacing: -.02em; line-height: 1.1; }
+  .dato span { color: var(--muted); font-size: 15px; }
+  @media (max-width: 720px) { .datos .wrap { grid-template-columns: 1fr 1fr; } .dato { border-left: 0; padding: 20px 0; } }
+
+  section.bloque { padding: 96px 0 0; }
+  .titulo { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 36px; }
+  h2 { font-size: clamp(30px, 4vw, 42px); letter-spacing: -.03em; line-height: 1.1; margin: 8px 0 0; }
+  .titulo p { color: var(--muted); margin: 0; max-width: 30em; }
+
+  .proyectos { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .proyecto { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; transition: border-color .2s, transform .2s; }
+  .proyecto:hover { border-color: #3a4459; transform: translateY(-3px); }
+  .proyecto .captura { aspect-ratio: 16/10; overflow: hidden; border-bottom: 1px solid var(--line); background: #0f1218; }
+  .proyecto .captura img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .6s; }
+  .proyecto:hover .captura img { transform: scale(1.03); }
+  .proyecto .cuerpo { padding: 22px 24px 26px; display: grid; gap: 10px; }
+  .proyecto h3 { margin: 0; font-size: 21px; letter-spacing: -.02em; display: flex; justify-content: space-between; gap: 12px; }
+  .proyecto h3 .mono { color: var(--accent); font-weight: 400; }
+  .proyecto p { margin: 0; color: var(--muted); font-size: 16px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags span { font-family: var(--mono); font-size: 12px; color: #c7cde0; background: #1b2130; border: 1px solid var(--line); padding: 3px 8px; border-radius: 6px; }
+  .proyecto.grande { grid-column: 1 / -1; display: grid; grid-template-columns: 1.3fr 1fr; }
+  .proyecto.grande .captura { aspect-ratio: auto; border-bottom: 0; border-right: 1px solid var(--line); }
+  .proyecto.grande .cuerpo { align-content: center; padding: 36px; }
+  .proyecto.grande h3 { font-size: 28px; }
+  .proyecto ul { margin: 4px 0 0; padding-left: 18px; color: var(--muted); font-size: 15.5px; }
+  .proyecto li { margin: 4px 0; }
+  @media (max-width: 860px) { .proyectos { grid-template-columns: 1fr; } .proyecto.grande { grid-template-columns: 1fr; } .proyecto.grande .captura { aspect-ratio: 16/10; border-right: 0; border-bottom: 1px solid var(--line); } .proyecto.grande .cuerpo { padding: 24px; } }
+
+  .linea { display: grid; gap: 0; }
+  .paso { display: grid; grid-template-columns: 190px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid var(--line); }
+  .paso:last-child { border-bottom: 1px solid var(--line); }
+  .paso .cuando { color: var(--muted); }
+  .paso .cuando b { display: block; color: var(--fg); font-family: var(--sans); font-size: 15px; font-weight: 600; letter-spacing: 0; }
+  .paso h3 { margin: 0 0 4px; font-size: 20px; letter-spacing: -.02em; }
+  .paso h3 a { text-decoration: none; color: var(--accent); font-weight: 500; font-size: 15px; margin-left: 8px; }
+  .paso p { margin: 0; color: var(--muted); }
+  @media (max-width: 720px) { .paso { grid-template-columns: 1fr; gap: 6px; } }
+
+  .stack { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grupo { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+  .grupo h3 { margin: 0 0 12px; font-size: 15px; color: var(--accent-2); font-family: var(--mono); font-weight: 500; letter-spacing: .02em; }
+  @media (max-width: 860px) { .stack { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .stack { grid-template-columns: 1fr; } }
+
+  .contacto { margin: 96px 0 0; padding: 72px 0; background: linear-gradient(135deg, #171c2a, #10131a); border-top: 1px solid var(--line); }
+  .contacto .wrap { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .contacto h2 { margin: 0 0 8px; }
+  .contacto p { margin: 0; color: var(--muted); }
+  .canales { display: grid; gap: 10px; }
+  .canales a { display: flex; gap: 12px; align-items: center; text-decoration: none; font-size: 18px; font-weight: 600; }
+  .canales a .mono { color: var(--muted); width: 80px; font-weight: 400; }
+  .canales a:hover { color: var(--accent); }
+  footer { padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio">Brian <span>Stegman</span></a>
+    <nav>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#stack">Tecnologías</a>
+      <a class="btn primary" href="/CV-Brian-Stegman.pdf" download>Descargar CV</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="mono eyebrow"><span class="punto"></span>Disponible para trabajar · Remoto o presencial</span>
+        <h1>Desarrollador <em>Full Stack</em> que pone sistemas en producción.</h1>
+        <p class="lead">Trabajé en Capgemini y Quares IT Solutions. Hoy desarrollo y mantengo mi propia plataforma de sitios y tiendas online, con integraciones de WhatsApp, Instagram e inteligencia artificial.</p>
+        <div class="acciones">
+          <a class="btn primary" href="/CV-Brian-Stegman.pdf" download>Descargar CV (PDF)</a>
+          <a class="btn" href="#proyectos">Ver proyectos</a>
+          <a class="btn" href="mailto:stegmanmaxi@gmail.com">stegmanmaxi@gmail.com</a>
+        </div>
+      </div>
+      <div class="foto">
+        <img src="/img/maxi.webp" alt="Foto de Brian Stegman" width="480" height="600">
+        <div class="chip"><b>Grand Bourg, Buenos Aires</b><span class="mono">Next.js · TypeScript · Node.js</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="datos">
+    <div class="wrap">
+      <div class="dato"><b>+10 años</b><span>programando</span></div>
+      <div class="dato"><b>140k</b><span>líneas de TypeScript en mi plataforma</span></div>
+      <div class="dato"><b>+1.200</b><span>tests automáticos</span></div>
+      <div class="dato"><b>4</b><span>sitios en producción</span></div>
+    </div>
+  </div>
+
+  <section class="bloque" id="proyectos">
+    <div class="wrap">
+      <div class="titulo">
+        <div><span class="mono eyebrow">Proyectos</span><h2>Sistemas funcionando de verdad</h2></div>
+        <p>Todos están en línea: podés entrar, navegar la tienda y probar el carrito.</p>
+      </div>
+      <div class="proyectos">
+        <a class="proyecto grande" href="https://altagama.com.ar" target="_blank" rel="noopener">
+          <div class="captura"><img src="/img/altagama.webp" alt="Portada de Alta Gama" loading="lazy"></div>
+          <div class="cuerpo">
+            <span class="mono eyebrow">Proyecto propio · Plataforma SaaS</span>
+            <h3>Alta Gama <span class="mono">altagama.com.ar ↗</span></h3>
+            <p>Plataforma multi-sitio: desde una sola base de código genera la web, la tienda y el panel de gestión de cada negocio, cada uno con su dominio.</p>
+            <ul>
+              <li>Pedidos, pagos, catálogo con variantes y editor de páginas por bloques.</li>
+              <li>Atención automática por WhatsApp e Instagram con IA.</li>
+              <li>Infraestructura propia: VPS Linux, Docker, Caddy, Cloudflare y despliegues con vuelta atrás.</li>
+            </ul>
+            <div class="tags"><span>Next.js</span><span>React</span><span>TypeScript</span><span>PostgreSQL</span><span>Drizzle</span><span>Tailwind</span><span>Docker</span></div>
+          </div>
+        </a>
+        <a class="proyecto" href="https://akanesushi.com.ar" target="_blank" rel="noopener">
+          <div class="captura"><img src="/img/akanesushi.webp" alt="Carta online de Akane Sushi" loading="lazy"></div>
+          <div class="cuerpo">
+            <h3>Akane Sushi <span class="mono">↗</span></h3>
+            <p>Carta online de un restaurante con pedidos directos a WhatsApp, horarios y promos del día.</p>
+            <div class="tags"><span>Cliente real</span><span>Pedidos</span><span>WhatsApp</span></div>
+          </div>
+        </a>
+        <a class="proyecto" href="https://goldacademia.com.ar" target="_blank" rel="noopener">
+          <div class="captura"><img src="/img/goldacademia.webp" alt="Sitio de Gold Academia" loading="lazy"></div>
+          <div class="cuerpo">
+            <h3>Gold Academia <span class="mono">↗</span></h3>
+            <p>Academia de belleza con cursos, inscripciones y tienda online de más de 100 productos.</p>
+            <div class="tags"><span>Cliente real</span><span>E-commerce</span><span>Cursos</span></div>
+          </div>
+        </a>
+        <a class="proyecto" href="https://nuevadermo.com.ar" target="_blank" rel="noopener">
+          <div class="captura"><img src="/img/nuevadermo.webp" alt="Sitio de Nueva Dermo" loading="lazy"></div>
+          <div class="cuerpo">
+            <h3>Nueva Dermo <span class="mono">↗</span></h3>
+            <p>Academia de estética propia: sitio, tienda, páginas de cursos y certificados con código QR verificable.</p>
+            <div class="tags"><span>Proyecto propio</span><span>Tienda</span><span>Certificados QR</span></div>
+          </div>
+        </a>
+        <div class="proyecto">
+          <div class="cuerpo">
+            <span class="mono eyebrow">Proyecto propio</span>
+            <h3>Jarvis</h3>
+            <p>App para manejar la PC desde el celular: servidor intermediario en la nube, puente local en la PC y app Android (PWA empaquetada con Bubblewrap).</p>
+            <div class="tags"><span>Node.js</span><span>PWA</span><span>Android</span><span>WebSockets</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloque" id="experiencia">
+    <div class="wrap">
+      <div class="titulo"><div><span class="mono eyebrow">Experiencia</span><h2>Dónde trabajé</h2></div></div>
+      <div class="linea">
+        <div class="paso"><div class="cuando mono"><b>Alta Gama</b>2016 – hoy</div><div><h3>Desarrollador Full Stack · Proyecto propio<a href="https://altagama.com.ar" target="_blank" rel="noopener">altagama.com.ar ↗</a></h3><p>Diseño, desarrollo y opero la plataforma completa: frontend, backend, base de datos, servidores y despliegues.</p></div></div>
+        <div class="paso"><div class="cuando mono"><b>Quares IT Solutions</b>2016 – 2018</div><div><h3>Desarrollador Web · PHP y .NET</h3><p>Sitios y aplicaciones web a medida para clientes de la empresa, en equipo con analistas y diseñadores.</p></div></div>
+        <div class="paso"><div class="cuando mono"><b>Capgemini</b>2013 – 2016</div><div><h3>Desarrollador .NET · C#</h3><p>Aplicaciones web en .NET para clientes corporativos de la consultora.</p></div></div>
+        <div class="paso"><div class="cuando mono"><b>Tu Sitio Ya</b>2012 – 2013</div><div><h3>Desarrollador PHP y Web</h3><p>Sitios y aplicaciones web en PHP, posicionamiento y mantenimiento.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloque" id="stack">
+    <div class="wrap">
+      <div class="titulo"><div><span class="mono eyebrow">Tecnologías</span><h2>Con qué trabajo</h2></div></div>
+      <div class="stack">
+        <div class="grupo"><h3>frontend</h3><div class="tags"><span>React</span><span>Next.js</span><span>TypeScript</span><span>JavaScript</span><span>Tailwind</span><span>HTML</span><span>CSS</span></div></div>
+        <div class="grupo"><h3>backend</h3><div class="tags"><span>Node.js</span><span>PHP</span><span>C# / .NET</span><span>Java</span><span>APIs REST</span><span>Webhooks</span></div></div>
+        <div class="grupo"><h3>datos</h3><div class="tags"><span>PostgreSQL</span><span>MongoDB</span><span>MySQL</span><span>SQL Server</span><span>Drizzle ORM</span></div></div>
+        <div class="grupo"><h3>infraestructura</h3><div class="tags"><span>Linux</span><span>Docker</span><span>Caddy</span><span>Nginx</span><span>Cloudflare</span><span>Git</span></div></div>
+        <div class="grupo"><h3>inteligencia artificial</h3><div class="tags"><span>Claude</span><span>DeepSeek</span><span>Bots</span><span>Programación con IA</span></div></div>
+        <div class="grupo"><h3>calidad</h3><div class="tags"><span>Tests automáticos</span><span>ESLint</span><span>TypeScript estricto</span><span>CI / releases</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contacto" id="contacto">
+    <div class="wrap">
+      <div>
+        <h2>¿Hablamos?</h2>
+        <p>Estoy buscando un puesto como desarrollador, remoto o presencial.</p>
+      </div>
+      <div class="canales">
+        <a href="mailto:stegmanmaxi@gmail.com"><span class="mono">email</span>stegmanmaxi@gmail.com</a>
+        <a href="https://wa.me/5491169641515" target="_blank" rel="noopener"><span class="mono">whatsapp</span>+54 11 6964-1515</a>
+        <a href="/CV-Brian-Stegman.pdf" download><span class="mono">cv</span>Descargar en PDF</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Brian Stegman</span><span class="mono">maxistegman.com.ar</span></div></footer>
+</body>
+</html>
